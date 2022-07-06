@@ -24,7 +24,7 @@ const getJournal = async (req, res) => {
       id,
     ]);
 
-    res.json({
+    return res.json({
       journal,
     });
   } catch (error) {
@@ -41,13 +41,12 @@ const createJournal = async (req, res) => {
   try {
     const payload = req.body;
 
-    const [journal] = await req.db.query(
+    await req.db.query(
       "INSERT INTO journals (title, image_url) VALUES (?, ?)",
       [payload.title, payload.image_url]
     );
 
-    console.log(payload);
-    res.json({
+    return res.json({
       success: true,
     });
   } catch (error) {
@@ -65,12 +64,13 @@ const updateJournal = async (req, res) => {
     const payload = req.body;
     const { id } = req.params;
 
-    const [journal] = await req.db.query(
-      "UPDATE journals SET title=?, image_url=?WHERE id=?",
-      [payload.title, payload.image_url, id]
-    );
+    await req.db.query("UPDATE journals SET title=?, image_url=?WHERE id=?", [
+      payload.title,
+      payload.image_url,
+      id,
+    ]);
 
-    res.json({
+    return res.json({
       success: true,
     });
   } catch (error) {
