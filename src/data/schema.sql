@@ -22,5 +22,5 @@ CREATE TABLE cities (
     weather_description VARCHAR(255) NOT NULL,
     country_code VARCHAR(255) NOT NULL,
     FOREIGN KEY (journal_id)
-    REFERENCES journals(id)
+    REFERENCES journals(id) ON DELETE CASCADE
 );
