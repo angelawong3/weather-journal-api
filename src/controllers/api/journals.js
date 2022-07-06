@@ -37,16 +37,50 @@ const getJournal = async (req, res) => {
   }
 };
 
-const createJournal = (req, res) => {
-  res.send("createJournal");
+const createJournal = async (req, res) => {
+  try {
+    const payload = req.body;
+
+    const [journal] = await req.db.query(
+      "INSERT INTO journals (title, image_url) VALUES (?, ?)",
+      [payload.title, payload.image_url]
+    );
+
+    console.log(payload);
+    res.json({
+      success: true,
+    });
+  } catch (error) {
+    console.log(`[ERROR: Failed to create journal | ${error.message}]`);
+
+    return res.status(500).json({
+      success: false,
+      error: "Failed to create journal",
+    });
+  }
 };
 
 const updateJournal = (req, res) => {
   res.send("updateJournal");
 };
 
-const deleteJournal = (req, res) => {
-  res.send("deleteJournal");
+const deleteJournal = async (req, res) => {
+  try {
+    const { id } = req.params;
+
+    await req.db.query("DELETE FROM journals WHERE id=?", [id]);
+
+    return res.status(200).json({
+      success: true,
+    });
+  } catch (error) {
+    console.log(`[ERROR: Failed to delete journal | ${error.message}]`);
+
+    return res.status(500).json({
+      success: false,
+      error: "Failed to delete journal",
+    });
+  }
 };
 
 module.exports = {
