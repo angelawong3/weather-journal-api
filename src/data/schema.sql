@@ -12,9 +12,9 @@ CREATE TABLE journals (
     endDate DATE
 );
 
-CREATE TABLE citys (
+CREATE TABLE cities (
     id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
-    journal_id INT NOT NULL,
+    journal_id INT,
     city_name VARCHAR(255) NOT NULL,
     temperature DECIMAL(8, 2) NOT NULL,
     humidity DECIMAL(8, 2) NOT NULL,

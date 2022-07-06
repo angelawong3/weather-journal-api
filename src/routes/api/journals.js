@@ -17,6 +17,6 @@ router.post("/", createJournal);
 router.put("/:id", updateJournal);
 router.delete("/:id", deleteJournal);
 
-router.use("/:id/cities", cities);
+router.use("/:journal_id/cities", cities);
 
 module.exports = router;

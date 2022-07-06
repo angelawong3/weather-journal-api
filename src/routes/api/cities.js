@@ -6,10 +6,10 @@ const {
   removeCityFromJornal,
 } = require("../../controllers/api/cities");
 
-const router = Router();
+const router = Router({ mergeParams: true });
 
 router.get("/", getCitiesFromJournal);
 router.post("/", addCityToJournal);
-router.delete("/:id", removeCityFromJornal);
+router.delete("/:cityId", removeCityFromJornal);
 
 module.exports = router;
